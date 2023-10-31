@@ -1,6 +1,6 @@
 ﻿namespace MonsterFight;
 
-public enum ERace {Orc, Troll, Goblin, Elf, Dragonborn, None}
+public enum ERace {Orc, Troll, Goblin, None}
 
 public class Monster
 {
@@ -11,7 +11,7 @@ public class Monster
 
     protected ERace MonsterERace = ERace.None;
     
-    public ERace ERace => MonsterERace;
+    // public ERace ERace => MonsterERace;
 
     protected Monster()
     {
@@ -26,7 +26,7 @@ public class Monster
         Sp = sp;
     }
 
-    public virtual float Attack(Monster target, float damage)
+    protected virtual float Attack(Monster target, float damage)
     {
         return target.Hp -= Ap - target.Dp;
     }

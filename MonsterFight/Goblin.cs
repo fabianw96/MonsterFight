@@ -4,11 +4,13 @@ public class Goblin : Monster
 {
     public Goblin()
     {
-        Hp = 100;
-        Ap = 10;
-        Dp = 3;
-        Sp = 7;
+        Hp = 100f;
+        Ap = 10f;
+        Dp = 3f;
+        Sp = 7f;
         MonsterERace = ERace.Goblin;
+        Console.WriteLine("You chose: {0}", MonsterERace);
+
     }
     
     public Goblin(float hp, float ap, float dp, float sp) : base(hp, ap, dp, sp)

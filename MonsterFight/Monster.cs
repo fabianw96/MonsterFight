@@ -4,10 +4,10 @@ public enum ERace {Orc, Troll, Goblin, None}
 
 public class Monster
 {
-    protected float Hp { get; set; }
-    protected float Ap { get; set; }
-    protected float Dp { get; set; }
-    protected float Sp { get; set; }
+    public float Hp { get; protected set; }
+    public float Ap { get; protected set; }
+    public float Dp { get; protected set; }
+    public float Sp { get; protected set; }
 
     protected ERace MonsterERace = ERace.None;
     
@@ -26,8 +26,9 @@ public class Monster
         Sp = sp;
     }
 
-    protected virtual float Attack(Monster target, float damage)
+    public virtual float Attack(Monster defender)
     {
-        return target.Hp -= Ap - target.Dp;
+        // Console.WriteLine("Monster attack!");
+        return defender.Hp -= Ap - defender.Dp;
     }
 }

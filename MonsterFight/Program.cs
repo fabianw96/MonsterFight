@@ -1,7 +1,9 @@
 ﻿using MonsterFight;
 
 int[] playerChoice = new int[2];
-Monster[] monster = new Monster[2];
+// Monster[] monster = new Monster[2];
+List<Monster> monsterList = new List<Monster>();
+
 
 Console.WriteLine("Please chose 2 Monsters: ");
 
@@ -10,28 +12,16 @@ for (int i = 0; i != (int) ERace.None; i++)
     Console.WriteLine((ERace)i);
 }
 
-for (int i = 0; i < playerChoice.Length; i++)
-{
-    while (!int.TryParse(Console.ReadLine(), out playerChoice[i]))
-    {
-        Console.WriteLine("Please enter a valid number!: ");
-    }
+UserInput input = new UserInput();
 
-    switch (playerChoice[i])
-    {
-        case 1:
-            monster[i] = new Orc();
-            break;
-        case 2:
-            monster[i] = new Troll();
-            break;
-        case 3:
-            monster[i] = new Goblin();
-            break;
-    }
-}
-Console.WriteLine(monster[0]);
-Console.WriteLine(monster[1]);
+monsterList.Add(input.CreateMonster());
+monsterList.Add(input.CreateMonster());
+
+Console.WriteLine(monsterList[0].Hp);
+
+Console.WriteLine(monsterList[0].Attack(monsterList[1]));
+
+
 
 
 

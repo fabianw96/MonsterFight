@@ -15,14 +15,13 @@ public class Orc : Monster
     public Orc(float hp, float ap, float dp, float sp) : base(hp, ap, dp, sp)
     {
         MonsterERace = ERace.Orc;
+        Console.WriteLine("You chose: {0}", MonsterERace);
     }
 
-    protected override float Attack(Monster target, float damage)
+    public override float Attack(Monster defender)
     {
-        if (Hp < Hp * 0.5f)
-        {
-            Console.WriteLine("Half HP");
-        }
-        return base.Attack(target, damage);
+        //take less damage on 20% hp
+        Console.WriteLine("Orc attack!");
+        return base.Attack(defender);
     }
 }

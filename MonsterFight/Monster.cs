@@ -11,11 +11,11 @@ public class Monster
 
     protected ERace MonsterERace = ERace.None;
     
-    // public ERace ERace => MonsterERace;
+    public ERace ERace => MonsterERace;
 
     protected Monster()
     {
-        
+
     }
 
     protected Monster(float hp, float ap, float dp, float sp)
@@ -29,6 +29,10 @@ public class Monster
     public virtual float Attack(Monster defender)
     {
         // Console.WriteLine("Monster attack!");
+        if (Hp < 0)
+        {
+            Hp = 0;
+        }
         return defender.Hp -= Ap - defender.Dp;
     }
 }

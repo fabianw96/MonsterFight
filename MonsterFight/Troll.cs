@@ -23,7 +23,7 @@ public class Troll : Monster
     public override float Attack(Monster defender)
     {
         //deal more damage on 15%
-        Console.WriteLine("Orc attack!");
+        Console.WriteLine("Troll attack!");
         return base.Attack(defender);
     }
 }

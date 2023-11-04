@@ -9,17 +9,16 @@ public class UserInput
     {
         
         Console.WriteLine("Please chose a Monsters: ");
-
         for (int i = 0; i != (int) ERace.None; i++)
         {
             Console.WriteLine((ERace)i);
         }
-        
         float raceChoice = ParseInput();
+        
         Console.WriteLine("(1) Default or (2) custom stats?");
         float statChoice = ParseInput();
 
-        if (statChoice == 1)
+        if ((int)statChoice == 1)
         {
             switch (raceChoice)
             {

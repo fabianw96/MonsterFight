@@ -22,9 +22,8 @@ public class Goblin : Monster
     
     public override float Attack(Monster defender)
     {
-        //dodge with rate of 15%
+        //need ideas!
         Console.WriteLine("Goblin attack!");
         return base.Attack(defender);
     }
-    
 }

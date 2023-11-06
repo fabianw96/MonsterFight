@@ -1,6 +1,6 @@
 ﻿namespace MonsterFight;
 
-public enum ERace {Orc, Troll, Goblin, None}
+public enum ERace {Orc = 1, Troll, Goblin, None}
 
 public class Monster
 {
@@ -29,7 +29,7 @@ public class Monster
     public virtual float Attack(Monster defender)
     {
         // Console.WriteLine("Monster attack!");
-        if (Hp < 0)
+        if (Hp <= 0)
         {
             Hp = 0;
         }

@@ -7,31 +7,22 @@ public class UserInput
 
     public Monster CreateMonster()
     {
-        
-        Console.WriteLine("Please chose a Monsters: ");
-        for (int i = 0; i != (int) ERace.None; i++)
+        Console.Clear();
+        Console.WriteLine("Please chose a Monster: ");
+        for (ERace race = (ERace)1; race < ERace.None; race++)
         {
-            Console.WriteLine((ERace)i);
+            Console.WriteLine("{0}. {1}", (int)race, race);
         }
-        float raceChoice = ParseInput();
+        
+        ERace selectedRace = (ERace)ParseInput();
+        Console.WriteLine(selectedRace);
         
         Console.WriteLine("(1) Default or (2) custom stats?");
         float statChoice = ParseInput();
 
         if ((int)statChoice == 1)
         {
-            switch (raceChoice)
-            {
-                case 1:
-                    _monster1 = new Orc();
-                    break;
-                case 2:
-                    _monster1 = new Troll();
-                    break;
-                case 3:
-                    _monster1 = new Goblin();
-                    break;
-            }
+            _monster1 = new MonsterFactory().CreateMonster(selectedRace);
         }
         else
         {
@@ -40,19 +31,8 @@ public class UserInput
             float userAp = ParseInput();
             float userDp = ParseInput();
             float userSp = ParseInput();
-            
-            switch (raceChoice)
-            {
-                case 1:
-                    _monster1 = new Orc(userHp, userAp, userDp, userSp);
-                    break;
-                case 2:
-                    _monster1 = new Troll(userHp, userAp, userDp, userSp);
-                    break;
-                case 3:
-                    _monster1 = new Goblin(userHp, userAp, userDp, userSp);
-                    break;
-            }
+
+            _monster1 = new MonsterFactory().CreateMonster(selectedRace, userHp, userAp, userDp, userSp);
         }
         
         return _monster1;

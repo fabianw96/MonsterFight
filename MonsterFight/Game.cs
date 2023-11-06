@@ -16,6 +16,9 @@ public class Game
     
     public void GameLoop()
     {
+        Console.Clear();
+
+        Console.WriteLine("A fight between {0} and {1} has started!", _monster1.ERace, _monster2.ERace);
         Monster attacker = _monster1.Sp > _monster2.Sp ? _monster1 : _monster2;
         Monster defender = attacker == _monster1 ? _monster2 : _monster1;
 
@@ -24,11 +27,12 @@ public class Game
         while (_monster1.Hp > 0 && _monster2.Hp > 0)
         {
             attacker.Attack(defender);
-            Thread.Sleep(1000);
-            Console.WriteLine($"{defender.ERace} HP: {defender.Hp}");
+            Thread.Sleep(750);
+            Console.WriteLine("{0} HP: {1}",defender.ERace,defender.Hp < 0 ? 0 : defender.Hp);
             Swap(ref attacker, ref defender);
         }
 
+        
         GameEnd();
     }
 
@@ -39,6 +43,10 @@ public class Game
 
     void GameEnd()
     {
+        // Console.Clear();
+        Console.WriteLine("FIGHT ENDED!");
+        Console.WriteLine("{0} has {1} HP left...", _monster1.ERace, _monster1.Hp < 0 ? 0 : _monster1.Hp);
+        Console.WriteLine("and {0} has {1} HP left...", _monster2.ERace, _monster2.Hp < 0 ? 0 : _monster2.Hp);
         Monster winner = _monster1.Hp == 0 ? _monster2 : _monster1;
         Console.WriteLine($"{winner.ERace} won!");
         Console.ReadKey();

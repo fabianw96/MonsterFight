@@ -2,38 +2,40 @@
 
 public class Game
 {
+    private UserInput _input = new UserInput();
+    private HPBars hpBars = new HPBars();
     
-    private List<Monster> _monsterList;
-    private Monster _monster1;
-    private Monster _monster2;
-
-    public Game(List<Monster> monsterList)
+    public void StartGame()
     {
-        _monsterList = monsterList;
-        _monster1 = _monsterList[0];
-        _monster2 = _monsterList[1];
+        Monster monster1 = _input.CreateMonster(ERace.None);
+        Monster monster2 = _input.CreateMonster(monster1.MonsterERace);
+        
+        GameLoop(monster1, monster2);
     }
     
-    public void GameLoop()
+    private void GameLoop(Monster monster1, Monster monster2)
     {
         Console.Clear();
 
-        Console.WriteLine("A fight between {0} and {1} has started!", _monster1.ERace, _monster2.ERace);
-        Monster attacker = _monster1.Sp > _monster2.Sp ? _monster1 : _monster2;
-        Monster defender = attacker == _monster1 ? _monster2 : _monster1;
+        Console.WriteLine("A fight between {0} and {1} has started!", monster1.MonsterERace, monster2.MonsterERace);
+        Monster attacker = monster1.Sp > monster2.Sp ? monster1 : monster2;
+        Monster defender = attacker == monster1 ? monster2 : monster1;
+        
+        Console.WriteLine($"{attacker.MonsterERace} attacks first!");
+        hpBars.DisplayHPBars(monster1, monster2);
 
-        Console.WriteLine($"{attacker.ERace} attacks first!");
 
-        while (_monster1.Hp > 0 && _monster2.Hp > 0)
+        while (monster1.Hp > 0 && monster2.Hp > 0)
         {
             attacker.Attack(defender);
-            Thread.Sleep(750);
-            Console.WriteLine("{0} HP: {1}",defender.ERace,defender.Hp < 0 ? 0 : defender.Hp);
+            Thread.Sleep(1000);
+            Console.Clear();
             Swap(ref attacker, ref defender);
+            // Console.WriteLine("{0} HP - {1} HP", monster1.Hp, monster2.Hp);
+            hpBars.DisplayHPBars(monster1, monster2);
         }
-
-        
-        GameEnd();
+       
+        GameEnd(monster1, monster2);
     }
 
     void Swap(ref Monster first, ref Monster second)
@@ -41,14 +43,14 @@ public class Game
         (first, second) = (second, first);
     }
 
-    void GameEnd()
+    void GameEnd(Monster monster1, Monster monster2)
     {
         // Console.Clear();
         Console.WriteLine("FIGHT ENDED!");
-        Console.WriteLine("{0} has {1} HP left...", _monster1.ERace, _monster1.Hp < 0 ? 0 : _monster1.Hp);
-        Console.WriteLine("and {0} has {1} HP left...", _monster2.ERace, _monster2.Hp < 0 ? 0 : _monster2.Hp);
-        Monster winner = _monster1.Hp == 0 ? _monster2 : _monster1;
-        Console.WriteLine($"{winner.ERace} won!");
+        // Console.WriteLine("{0} has {1} HP left...", monster1.MonsterERace, monster1.Hp);
+        // Console.WriteLine("and {0} has {1} HP left...", monster2.MonsterERace, monster2.Hp);
+        Monster winner = monster1.Hp == 0 ? monster2 : monster1;
+        Console.WriteLine($"{winner.MonsterERace} won!");
         Console.ReadKey();
     }
 

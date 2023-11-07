@@ -2,40 +2,48 @@
 
 public class UserInput
 {
-    private Monster _monster1;
     
-
-    public Monster CreateMonster()
+    public Monster CreateMonster(ERace forbiddenRace)
     {
         Console.Clear();
-        Console.WriteLine("Please chose a Monster: ");
-        for (ERace race = (ERace)1; race < ERace.None; race++)
+        Console.WriteLine("Please choose a Monster: ");
+        for (ERace race = (ERace)1; race != ERace.None; race++)
         {
             Console.WriteLine("{0}. {1}", (int)race, race);
         }
-        
+
         ERace selectedRace = (ERace)ParseInput();
         Console.WriteLine(selectedRace);
+        Console.WriteLine((int)selectedRace);
+        while (selectedRace == forbiddenRace)
+        {
+            Console.WriteLine("The same race can't fight another!");
+            Console.Write("Please choose a different race: ");
+            
+            selectedRace = (ERace)ParseInput();
+            Console.WriteLine(selectedRace);
+        }
+        
         
         Console.WriteLine("(1) Default or (2) custom stats?");
-        float statChoice = ParseInput();
+        int statChoice = (int)ParseInput();
 
-        if ((int)statChoice == 1)
+        if (statChoice != 2)
         {
-            _monster1 = new MonsterFactory().CreateMonster(selectedRace);
-        }
-        else
-        {
-            Console.WriteLine("Please enter stats in order: HP, AP, DP, SP");
-            float userHp = ParseInput();
-            float userAp = ParseInput();
-            float userDp = ParseInput();
-            float userSp = ParseInput();
-
-            _monster1 = new MonsterFactory().CreateMonster(selectedRace, userHp, userAp, userDp, userSp);
+            Monster monster1 = new MonsterFactory().CreateMonster(selectedRace);
+            return monster1;
         }
         
-        return _monster1;
+        Console.WriteLine("Please enter stats in order: HP, AP, DP, SP");
+        float userHp = ParseInput();
+        float userAp = ParseInput();
+        float userDp = ParseInput();
+        float userSp = ParseInput();
+
+        
+        Monster monster = new MonsterFactory().CreateMonster(selectedRace, userHp, userAp, userDp, userSp);
+        
+        return monster;
     }
 
     private float ParseInput()

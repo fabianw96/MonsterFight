@@ -9,6 +9,7 @@ public class Orc : Monster
     public Orc()
     {
         Hp = 150f;
+        MaxHp = Hp;
         Ap = 15f;
         Dp = 7f;
         Sp = 3f;
@@ -24,17 +25,21 @@ public class Orc : Monster
         Console.WriteLine("You chose: {0}", MonsterERace);
     }
 
-    public override float Attack(Monster defender)
+    public override void Attack(Monster defender)
     {
-        //take less damage on 20% hp
-        if (Hp <= _lowLife && !_isEnraged)
+        Console.WriteLine("Orc attack!");
+        base.Attack(defender);
+    }
+
+    protected override void GetHit(float damageDealt)
+    {
+        if (!_isEnraged && Hp <= _lowLife)
         {
             Dp *= 1.5f;
             _isEnraged = true;
             Console.WriteLine("Orc has fallen below 15% HP!");
             Console.WriteLine("The Orc enrages and now takes 50% less damage!");
         }
-        Console.WriteLine("Orc attack!");
-        return base.Attack(defender);
+        base.GetHit(damageDealt);
     }
 }

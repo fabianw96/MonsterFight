@@ -1,17 +1,16 @@
 ﻿namespace MonsterFight;
 
-public enum ERace {Orc, Troll, Goblin, Elf, Dragonborn, None}
+
 
 public class Monster
 {
-    protected float Hp { get; set; }
-    protected float Ap { get; set; }
-    protected float Dp { get; set; }
-    protected float Sp { get; set; }
-
-    protected ERace MonsterERace = ERace.None;
-    
-    public ERace ERace => MonsterERace;
+    public float Hp { get; protected set; }
+    public float MaxHp { get; protected set; }
+    public float Ap { get; protected set; }
+    public float Dp { get; protected set; }
+    public float Sp { get; protected set; }
+    public ERace MonsterERace { get; protected set; }
+    // public ERace ERace => MonsterERace;
 
     protected Monster()
     {
@@ -21,13 +20,26 @@ public class Monster
     protected Monster(float hp, float ap, float dp, float sp)
     {
         Hp = hp;
+        MaxHp = Hp;
         Ap = ap;
         Dp = dp;
         Sp = sp;
     }
 
-    public virtual float Attack(Monster target, float damage)
+    public virtual void Attack(Monster defender)
     {
-        return target.Hp -= Ap - target.Dp;
+        float damageDealt = Ap - defender.Dp;
+        damageDealt = damageDealt < 0 ? 0 : damageDealt;
+        defender.GetHit(damageDealt);
+    }
+
+    protected virtual void GetHit(float damageDealt)
+    {        
+        Hp -= damageDealt;
+        if (Hp <= 0)
+        {
+            Hp = 0;
+        }
+        Console.WriteLine("{0} was hit for {1} and has {2} HP left", MonsterERace, damageDealt, Hp);
     }
 }

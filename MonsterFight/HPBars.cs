@@ -22,7 +22,7 @@ public class HPBars
         {
             if (currentHP < maxHP / 4)
             {
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.BackgroundColor = ConsoleColor.Red;
                 Console.Write(" ");
             }
             else if (currentHP < maxHP / 2)
@@ -36,6 +36,7 @@ public class HPBars
                 Console.Write(" ");
             }
         }
+
         Console.BackgroundColor = ConsoleColor.Black;
         Console.WriteLine();
     }

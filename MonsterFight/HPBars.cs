@@ -18,21 +18,21 @@ public class HPBars
         int barLength = (int)maxHP / 10; // =10
         int fillLength = (int)(currentHP / maxHP * barLength); // =10
 
-        for (int i = 0; i < barLength; i++) // i = 0
+        for (int i = 0; i < fillLength; i++) // i = 0
         {
-            if (i < fillLength)
+            if (currentHP < maxHP / 4)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.Write(" ");
+            }
+            else if (currentHP < maxHP / 2)
             {
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.Write(" ");
             }
-            else if(i < fillLength)
-            {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.Write(" ");
-            }
             else
             {
-                Console.BackgroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.Green;
                 Console.Write(" ");
             }
         }

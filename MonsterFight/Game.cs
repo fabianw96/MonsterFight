@@ -3,13 +3,13 @@
 public class Game
 {
     private UserInput _input = new UserInput();
-    private HPBars hpBars = new HPBars();
+    private HPBars _hpBars = new HPBars();
     
     public void StartGame()
     {
         Monster monster1 = _input.CreateMonster(ERace.None);
         Monster monster2 = _input.CreateMonster(monster1.MonsterERace);
-        
+           
         GameLoop(monster1, monster2);
     }
     
@@ -22,7 +22,7 @@ public class Game
         Monster defender = attacker == monster1 ? monster2 : monster1;
         
         Console.WriteLine($"{attacker.MonsterERace} attacks first!");
-        hpBars.DisplayHPBars(monster1, monster2);
+        _hpBars.DisplayHPBars(monster1, monster2);
 
 
         while (monster1.Hp > 0 && monster2.Hp > 0)
@@ -32,7 +32,7 @@ public class Game
             Console.Clear();
             Swap(ref attacker, ref defender);
             // Console.WriteLine("{0} HP - {1} HP", monster1.Hp, monster2.Hp);
-            hpBars.DisplayHPBars(monster1, monster2);
+            _hpBars.DisplayHPBars(monster1, monster2);
         }
        
         GameEnd(monster1, monster2);

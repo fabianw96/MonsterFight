@@ -23,7 +23,6 @@ public class UserInput
             Console.WriteLine(selectedRace);
         }
         
-        
         Console.WriteLine("(1) Default or (2) custom stats?");
         int statChoice = (int)ParseInput(1, 2);
 
@@ -38,7 +37,6 @@ public class UserInput
         float userAp = ParseInput(1, 20);
         float userDp = ParseInput(1, 20);
         float userSp = ParseInput(1, 20);
-
         
         Monster monster = new MonsterFactory().CreateMonster(selectedRace, userHp, userAp, userDp, userSp);
         

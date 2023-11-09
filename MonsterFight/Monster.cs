@@ -1,6 +1,6 @@
 ﻿namespace MonsterFight;
 
-public enum ERace {Orc = 1, Troll, Goblin, None}
+
 
 public class Monster
 {
@@ -29,6 +29,7 @@ public class Monster
     public virtual void Attack(Monster defender)
     {
         float damageDealt = Ap - defender.Dp;
+        damageDealt = damageDealt < 0 ? 0 : damageDealt;
         defender.GetHit(damageDealt);
     }
 
@@ -39,6 +40,6 @@ public class Monster
         {
             Hp = 0;
         }
-        Console.WriteLine("{0} was hit for {1} and has {2}HP left", MonsterERace, damageDealt, Hp);
+        Console.WriteLine("{0} was hit for {1} and has {2} HP left", MonsterERace, damageDealt, Hp);
     }
 }

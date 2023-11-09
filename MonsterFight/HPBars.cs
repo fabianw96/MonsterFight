@@ -4,29 +4,39 @@ public class HPBars
 {
     public void DisplayHPBars(Monster monster1, Monster monster2)
     {
-        Console.WriteLine("{0}", monster1.MonsterERace);
+        Console.WriteLine("{0}, {1} / {2} HP ", monster1.MonsterERace, monster1.Hp, monster1.MaxHp);
         DrawHPBar(monster1.Hp, monster1.MaxHp);
         
-        Console.WriteLine("{0}", monster2.MonsterERace);
+        Console.WriteLine("{0}, {1} / {2} HP ", monster2.MonsterERace, monster2.Hp, monster2.MaxHp);
         DrawHPBar(monster2.Hp, monster2.MaxHp);
 
     }
 
     private void DrawHPBar(float currentHP, float maxHP)
     {
-        int barLength = 20;
-        int fillLength = (int)(currentHP / maxHP * barLength);
-        
-        Console.Write("[");
+        // int barLength = 20;
+        int barLength = (int)maxHP / 10; // =10
+        int fillLength = (int)(currentHP / maxHP * barLength); // =10
 
-        for (int i = 0; i < barLength; i++)
+        for (int i = 0; i < barLength; i++) // i = 0
         {
             if (i < fillLength)
-                Console.Write("#");
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.Write(" ");
+            }
+            else if(i < fillLength)
+            {
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.Write(" ");
+            }
             else
-                Console.Write("-");
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.Write(" ");
+            }
         }
-
-        Console.WriteLine($"] {currentHP}/{maxHP} HP");
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.WriteLine();
     }
 }

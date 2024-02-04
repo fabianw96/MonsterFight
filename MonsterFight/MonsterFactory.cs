@@ -2,6 +2,7 @@
 
 public class MonsterFactory
 {
+    //create monster with default values
     public Monster CreateMonster(ERace selectedRace)
     {
         switch (selectedRace)
@@ -16,7 +17,8 @@ public class MonsterFactory
                 throw new InvalidOperationException("Invalid race selection");
         }
     }
-
+    
+    //create monster with custom values
     public Monster CreateMonster(ERace selectedRace, float userHp, float userAp, float userDp, float userSp)
     {
         switch (selectedRace)

@@ -9,7 +9,6 @@ public class HPBars
         
         Console.WriteLine("{0}, {1} / {2} HP ", monster2.MonsterERace, monster2.Hp, monster2.MaxHp);
         DrawHPBar(monster2.Hp, monster2.MaxHp);
-
     }
 
     private void DrawHPBar(float currentHP, float maxHP)
@@ -20,16 +19,19 @@ public class HPBars
 
         for (int i = 0; i < fillLength; i++) // i = 0
         {
+            // draw currentHP as a red bar if it is below 1/4th of maxHP
             if (currentHP < maxHP / 4)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.Write(" ");
             }
+            // draw currentHP as a yellow bar if it is below 1/2th of maxHP
             else if (currentHP < maxHP / 2)
             {
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.Write(" ");
             }
+            // draw currentHP as a green bar if neither under 1/2 maxHP or 1/4 maxHP
             else
             {
                 Console.BackgroundColor = ConsoleColor.Green;
@@ -37,6 +39,7 @@ public class HPBars
             }
         }
 
+        // set background back to black where no HP is shown
         Console.BackgroundColor = ConsoleColor.Black;
         Console.WriteLine();
     }

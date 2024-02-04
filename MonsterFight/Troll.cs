@@ -21,6 +21,7 @@ public class Troll : Monster
     public Troll(float hp, float ap, float dp, float sp) : base(hp, ap, dp, sp)
     {
         MonsterERace = ERace.Troll;
+        //determine how much HP is considered low life
         _lowLife = Hp * _lowLifePercent;
         Console.WriteLine("You chose: {0}", MonsterERace);
 
@@ -29,7 +30,7 @@ public class Troll : Monster
     public override void Attack(Monster defender)
     {
         
-        //deal more damage on 30%
+        //deal more damage on lowlife
         if (!_isEnraged && Hp <= _lowLife)
         {
             Ap *= 2f;
@@ -40,10 +41,5 @@ public class Troll : Monster
         }
         Console.WriteLine("Troll attack!");
         base.Attack(defender);
-    }
-
-    protected override void GetHit(float damageDealt)
-    {
-        base.GetHit(damageDealt);
     }
 }

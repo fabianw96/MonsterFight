@@ -21,6 +21,7 @@ public class Orc : Monster
     public Orc(float hp, float ap, float dp, float sp) : base(hp, ap, dp, sp)
     {
         MonsterERace = ERace.Orc;
+        //determine how much HP is considered low life
         _lowLife = Hp * _lowLifePercent;
         Console.WriteLine("You chose: {0}", MonsterERace);
     }
